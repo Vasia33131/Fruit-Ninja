@@ -10,10 +10,14 @@ public class Fruits : MonoBehaviour
     private float rotationForce = 200;
     private Rigidbody  rb;
 
+    private GameManager gm;
+    public int scorePoints;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -46,4 +50,18 @@ public class Fruits : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Blade")
+        {
+            gm.UpdateTheScore(scorePoints);
+            Destroy(gameObject);
+            InstantiateSlisedFruit();
+        }
+
+        if(other.tag == "BottomTrigger")
+        {
+            gm.UpdateLives();
+        }
+    }
 }

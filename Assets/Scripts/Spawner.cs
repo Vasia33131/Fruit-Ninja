@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        while (true)
+        while (FindObjectOfType<GameManager>().gameIsOver == false)
         {
             InstantiateRandomObject();
             yield return new WaitForSeconds(RandomRepeatrate());
